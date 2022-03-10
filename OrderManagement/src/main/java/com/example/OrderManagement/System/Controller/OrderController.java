@@ -8,6 +8,7 @@ import com.example.OrderManagement.System.Service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,8 +31,8 @@ public class OrderController {
 
     @PostMapping
     public void registerNewOrder(@RequestBody Order order) throws Exception{
-        order.getDatenow();
-        order.getTotalCost()
+
+        order.getTotalCost();
         orderService.addNewOrder(order);
     }
 

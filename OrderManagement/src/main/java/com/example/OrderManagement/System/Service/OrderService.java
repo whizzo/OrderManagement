@@ -37,7 +37,7 @@ public class OrderService {
         }
     }
 
-    public void deleteClient(Long id){
+    public void deleteOrder(Long id){
         if(orderRepository.findById(id).isPresent()){
             orderRepository.deleteById(id);
         }else{
