@@ -41,9 +41,4 @@ public class ItemController {
             @RequestBody Item item){
         itemService.updateItem(id, item);
     }
-
-
-
-
-
 }
