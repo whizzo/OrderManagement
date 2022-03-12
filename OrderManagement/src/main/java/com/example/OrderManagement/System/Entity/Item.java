@@ -2,6 +2,7 @@ package com.example.OrderManagement.System.Entity;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table
@@ -18,6 +19,11 @@ public class Item {
     private Long id;
     private String name;
     private Double price;
+
+    @ManyToMany(mappedBy = "items")
+    private List<Orderi> inOrders;
+
+
 
 
     public Item() {

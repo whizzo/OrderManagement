@@ -2,9 +2,10 @@ package com.example.OrderManagement.System.Controller;
 
 
 import com.example.OrderManagement.System.Entity.Item;
-import com.example.OrderManagement.System.Entity.Order;
+import com.example.OrderManagement.System.Entity.Orderi;
 import com.example.OrderManagement.System.Repository.OrderRepository;
 import com.example.OrderManagement.System.Service.OrderService;
+import com.example.OrderManagement.System.Transport.CreateOrderTransport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,17 +25,18 @@ public class OrderController {
     public OrderController(OrderService orderService){this.orderService = orderService;}
 
     @GetMapping
-    public List<Order> getOrders(){return orderService.getOrders();}
+    public List<Orderi> getOrders(){return orderService.getOrders();}
 
     @GetMapping(path = "{orderID}")
-    public Optional<Order> getOrder(@PathVariable ("orderID") Long id) throws Exception{
+    public Optional<Orderi> getOrder(@PathVariable ("orderID") Long id) throws Exception{
         return orderService.getOrder(id);
     }
 
     @PostMapping
-    public void registerNewOrder(@RequestBody Order order) throws Exception{
-        order.setDatenow(String.valueOf(java.time.LocalDateTime.now()));
-        orderService.addNewOrder(order);
+    public void registerNewOrder(@RequestBody CreateOrderTransport createOrderTransport) throws Exception{
+//        order.setDatenow(String.valueOf(java.time.LocalDateTime.now()));
+
+        orderService.addNewOrder(createOrderTransport);
     }
 
     @DeleteMapping(path = "{orderID}")
@@ -43,7 +45,7 @@ public class OrderController {
     @PutMapping(path = "{orderID}")
     public void updateOrder(
             @PathVariable("orderID") Long id,
-            @RequestBody Order order){
+            @RequestBody Orderi order){
         orderService.updateOrder(id, order);
 
     }

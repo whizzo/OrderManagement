@@ -10,12 +10,12 @@ import javax.persistence.*;
 public class Inventory {
 
     @Id
-    @SequenceGenerator(
-            name = "inventory_sequence",
-            sequenceName = "inventory_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "inventory_sequence")
+//    @SequenceGenerator(
+//            name = "inventory_sequence",
+//            sequenceName = "inventory_sequence",
+//            allocationSize = 1
+//    )
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @OneToOne
