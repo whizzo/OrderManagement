@@ -19,6 +19,7 @@ public class OrderService {
 
     public OrderService(OrderRepository orderRepository) {this.orderRepository = orderRepository;}
 
+
     public List <Order> getOrders(){return orderRepository.findAll();}
 
     public Optional<Order> getOrder(Long id) throws Exception{
@@ -35,6 +36,9 @@ public class OrderService {
         }else{
             orderRepository.save(order);
         }
+        for(int i = 0; i<order.getItems().size(); i++){
+
+        }
     }
 
     public void deleteOrder(Long id){
@@ -44,6 +48,8 @@ public class OrderService {
             throw new IllegalArgumentException("Order with this id does not exist");
         }
     }
+
+
 
     @Transactional
 

@@ -8,6 +8,8 @@ import com.example.OrderManagement.System.Service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -31,8 +33,7 @@ public class OrderController {
 
     @PostMapping
     public void registerNewOrder(@RequestBody Order order) throws Exception{
-
-        order.getTotalCost();
+        order.setDatenow(String.valueOf(java.time.LocalDateTime.now()));
         orderService.addNewOrder(order);
     }
 

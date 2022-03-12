@@ -12,6 +12,7 @@ public class Order {
     @SequenceGenerator(
             name = "Order_sequence",
             sequenceName = "Order_sequence",
+
             allocationSize = 1
     )
 
@@ -19,16 +20,20 @@ public class Order {
 
     private Double totalCost;
 
+    @OneToMany
+    @JoinColumns({
+            @JoinColumn(name="itemName",referencedColumnName = "name"),
+            @JoinColumn(name= "itemPrice", referencedColumnName = "price")})
 
     private ArrayList<Item> items;
 
-    private Date datenow;
+    private String datenow;
 
     public Order(){
 
     }
 
-    public Order(Long orderID, Double totalCost, ArrayList<Item> items, Date datenow){
+    public Order(Long orderID, Double totalCost, ArrayList<Item> items, String datenow){
         this.orderID = orderID;
         this.totalCost = totalCost;
         this.items = items;
@@ -47,9 +52,9 @@ public class Order {
 
     public void setItems(ArrayList<Item> items) { this.items = items; }
 
-    public Date getDatenow() {return datenow;}
+    public String getDatenow() {return datenow;}
 
-    public void setDatenow(Date datenow) {this.datenow = datenow;}
+    public void setDatenow(String datenow) {this.datenow = datenow;}
 
     @Override
     public String toString() {
