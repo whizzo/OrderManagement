@@ -10,23 +10,21 @@ import javax.persistence.*;
 public class Inventory {
 
     @Id
-//    @SequenceGenerator(
-//            name = "inventory_sequence",
-//            sequenceName = "inventory_sequence",
-//            allocationSize = 1
-//    )
+    @SequenceGenerator(
+            name = "inventory_sequence",
+            sequenceName = "inventory_sequence",
+            allocationSize = 1
+    )
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @OneToOne
     @JoinColumn(name="itemID",referencedColumnName = "id")
     private Item item;
-
     private int quantity;
 
 
     public Inventory(){
-
     }
 
     public Inventory(int quantity, Long id){

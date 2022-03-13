@@ -9,9 +9,7 @@ import com.example.OrderManagement.System.Transport.CreateOrderTransport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import java.util.Date;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -34,8 +32,6 @@ public class OrderController {
 
     @PostMapping
     public void registerNewOrder(@RequestBody CreateOrderTransport createOrderTransport) throws Exception{
-//        order.setDatenow(String.valueOf(java.time.LocalDateTime.now()));
-
         orderService.addNewOrder(createOrderTransport);
     }
 

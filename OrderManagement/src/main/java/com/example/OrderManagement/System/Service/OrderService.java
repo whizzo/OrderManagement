@@ -3,6 +3,7 @@ package com.example.OrderManagement.System.Service;
 
 import com.example.OrderManagement.System.Entity.Item;
 import com.example.OrderManagement.System.Entity.Orderi;
+import com.example.OrderManagement.System.Repository.InventoryRepository;
 import com.example.OrderManagement.System.Repository.ItemRepository;
 import com.example.OrderManagement.System.Repository.OrderRepository;
 import com.example.OrderManagement.System.Transport.CreateOrderTransport;
@@ -20,12 +21,15 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
     private final ItemRepository itemRepository;
+    private final InventoryRepository inventoryRepository;
 
     @Autowired
 
-    public OrderService(OrderRepository orderRepository, ItemRepository itemRepository) {
+    public OrderService(OrderRepository orderRepository, ItemRepository itemRepository,
+                        InventoryRepository inventoryRepository) {
         this.itemRepository = itemRepository;
         this.orderRepository = orderRepository;
+        this.inventoryRepository = inventoryRepository;
     }
 
 
@@ -49,7 +53,6 @@ public class OrderService {
             }else{
                 items.add(item.get());
             }
-
         }
         orderi.setItems(items);
         orderi.setDatenow(new Date());
@@ -71,7 +74,6 @@ public class OrderService {
 
 
     @Transactional
-
     public void updateOrder(Long id, Orderi order){
         Orderi order1 = orderRepository.getById(id);
 //        order1.setDatenow(order.getDatenow());

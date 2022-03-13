@@ -6,7 +6,6 @@ import javax.persistence.*;
 @Table
 public class Client {
 
-
     @Id
     @SequenceGenerator(
             name = "client_sequence",
@@ -15,14 +14,13 @@ public class Client {
     )
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "client_sequence")
 
-
     private Long id;
     private String name;
     private String email;
     private Long phoneNumber;
 
-    public Client(){
 
+    public Client(){
     }
 
     public Client(Long id, String name, String email, Long phoneNumber){

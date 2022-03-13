@@ -15,7 +15,6 @@ public class Orderi {
             allocationSize = 1
 
     )
-
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "order_sequence")
 
     private Long orderID;

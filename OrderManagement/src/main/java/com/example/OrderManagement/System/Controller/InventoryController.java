@@ -4,6 +4,7 @@ package com.example.OrderManagement.System.Controller;
 import com.example.OrderManagement.System.Entity.Inventory;
 import com.example.OrderManagement.System.Entity.Item;
 import com.example.OrderManagement.System.Service.InventoryService;
+import com.example.OrderManagement.System.Transport.CreateInventoryTransport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -31,8 +32,8 @@ public class InventoryController {
     }
 
     @PostMapping
-    public void registerNewItem(@RequestBody Inventory inventory) throws Exception{
-        inventoryService.addNewInventory(inventory);
+    public void registerNewItem(@RequestBody CreateInventoryTransport createInventoryTransport) throws Exception{
+        inventoryService.addNewInventory(createInventoryTransport);
     }
 
     @DeleteMapping(path = "{inventoryID}")

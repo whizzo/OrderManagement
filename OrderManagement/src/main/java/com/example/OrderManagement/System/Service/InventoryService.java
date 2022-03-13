@@ -2,7 +2,10 @@ package com.example.OrderManagement.System.Service;
 
 
 import com.example.OrderManagement.System.Entity.Inventory;
+import com.example.OrderManagement.System.Entity.Item;
 import com.example.OrderManagement.System.Repository.InventoryRepository;
+import com.example.OrderManagement.System.Repository.ItemRepository;
+import com.example.OrderManagement.System.Transport.CreateInventoryTransport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,9 +17,12 @@ import java.util.Optional;
 public class InventoryService {
 
     private final InventoryRepository inventoryRepository;
+    private final ItemRepository itemRepository;
 
     @Autowired
-    public InventoryService(InventoryRepository inventoryRepository) {this.inventoryRepository = inventoryRepository;}
+    public InventoryService(InventoryRepository inventoryRepository, ItemRepository itemRepository) {
+        this.itemRepository = itemRepository;
+        this.inventoryRepository = inventoryRepository;}
 
     public List<Inventory> getInventories(){return inventoryRepository.findAll();}
 
@@ -29,11 +35,22 @@ public class InventoryService {
         return inventoryOptional;
     }
 
-    public void addNewInventory(Inventory inventory) throws Exception{
-        if(inventoryRepository.findByQuantity(inventory.getQuantity()).isPresent()){
-            throw new Exception("Inventory with this quantity is present");
+    public void addNewInventory(CreateInventoryTransport createInventoryTransport) throws Exception{
+        Optional<Item> inventory = inventoryRepository.findByItemId(createInventoryTransport.getItemID());
+
+        if(inventory.isEmpty()){
+            Inventory inventory1 = new Inventory();
+            Optional<Item> item = itemRepository.findById(createInventoryTransport.getItemID());
+            if(item.isPresent()){
+                inventory1.setItem(item.get());
+                inventory1.setQuantity(createInventoryTransport.getQuantity());
+                inventoryRepository.save(inventory1);
+            }
+            else{
+                throw new Exception("Item with this id does not exist!");
+            }
         }else{
-            inventoryRepository.save(inventory);
+            throw new Exception("Inventory with this id exists!");
         }
 
     }
