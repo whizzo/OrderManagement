@@ -1,6 +1,7 @@
 package com.example.OrderManagement.System.Service;
 
 
+import com.example.OrderManagement.System.Entity.Inventory;
 import com.example.OrderManagement.System.Entity.Item;
 import com.example.OrderManagement.System.Entity.Orderi;
 import com.example.OrderManagement.System.Repository.InventoryRepository;
@@ -52,6 +53,19 @@ public class OrderService {
                 throw new Exception("this item does not exist");
             }else{
                 items.add(item.get());
+                Optional<Inventory> inventory = inventoryRepository.findInventoryByItemId(item.get().getId());
+                if(inventory.isPresent()){
+                    Inventory inventory1 = inventory.get();
+                    if(inventory1.getQuantity()>0) {
+                        inventory1.setQuantity(inventory1.getQuantity() - 1);
+                    }
+                    else{
+                        throw new Exception("Inventoryu does not have stock");
+                    }
+                }
+                else{
+                    throw new Exception("Inventory with item id does not exist");
+                }
             }
         }
         orderi.setItems(items);
