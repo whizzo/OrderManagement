@@ -67,7 +67,7 @@ public class InventoryService {
     @Transactional
     public void updateInventory(Long id, Inventory inventory){
         Inventory inventory1 = inventoryRepository.getById(id);
-        inventory1.setQuantity(inventory.getQuantity() + inventory1.getQuantity());
+        inventory1.setQuantity(inventory.getQuantity() +inventory1.getQuantity());
         inventoryRepository.save(inventory1);
     }
 
