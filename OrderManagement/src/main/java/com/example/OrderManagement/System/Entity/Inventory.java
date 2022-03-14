@@ -1,7 +1,7 @@
 package com.example.OrderManagement.System.Entity;
 
 
-import com.example.OrderManagement.System.Repository.ItemRepository;
+
 
 import javax.persistence.*;
 

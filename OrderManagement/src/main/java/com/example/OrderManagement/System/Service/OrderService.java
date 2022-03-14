@@ -4,6 +4,7 @@ package com.example.OrderManagement.System.Service;
 import com.example.OrderManagement.System.Entity.Inventory;
 import com.example.OrderManagement.System.Entity.Item;
 import com.example.OrderManagement.System.Entity.Orderi;
+import com.example.OrderManagement.System.HttpExceptions.HttpRequestHandler;
 import com.example.OrderManagement.System.Repository.InventoryRepository;
 import com.example.OrderManagement.System.Repository.ItemRepository;
 import com.example.OrderManagement.System.Repository.OrderRepository;
@@ -39,7 +40,7 @@ public class OrderService {
     public Optional<Orderi> getOrder(Long id) throws Exception{
         Optional<Orderi> orderOptional = orderRepository.findById(id);
         if(orderRepository.findById(id).isEmpty()){
-            throw new Exception("Order with this id does not exist!");
+            throw new HttpRequestHandler("Order with this id does not exist!");
         }
         return orderOptional;
     }
@@ -47,24 +48,26 @@ public class OrderService {
     public void addNewOrder(CreateOrderTransport createOrderTransport) throws Exception{
         List<Item> items = new ArrayList<>();
         Orderi orderi = new Orderi();
+
         for(Integer id : createOrderTransport.getItemsID()){
             Optional<Item> item = itemRepository.findById((Long.parseLong( id + "")));
+
             if(item.isEmpty()){
-                throw new Exception("this item does not exist");
+                throw new HttpRequestHandler("this item does not exist");
             }else{
                 items.add(item.get());
                 Optional<Inventory> inventory = inventoryRepository.findInventoryByItemId(item.get().getId());
                 if(inventory.isPresent()){
                     Inventory inventory1 = inventory.get();
-                    if(inventory1.getQuantity()>0) {
+                    if(inventory1.getQuantity() > 0) {
                         inventory1.setQuantity(inventory1.getQuantity() - 1);
                     }
                     else{
-                        throw new Exception("Inventoryu does not have stock");
+                        throw new HttpRequestHandler("Inventory does not have stock");
                     }
                 }
                 else{
-                    throw new Exception("Inventory with item id does not exist");
+                    throw new HttpRequestHandler("Inventory with item id does not exist");
                 }
             }
         }
@@ -81,7 +84,7 @@ public class OrderService {
         if(orderRepository.findById(id).isPresent()){
             orderRepository.deleteById(id);
         }else{
-            throw new IllegalArgumentException("Order with this id does not exist");
+            throw new HttpRequestHandler("Order with this id does not exist");
         }
     }
 
@@ -90,7 +93,6 @@ public class OrderService {
     @Transactional
     public void updateOrder(Long id, Orderi order){
         Orderi order1 = orderRepository.getById(id);
-//        order1.setDatenow(order.getDatenow());
         order1.setTotalCost(order.getTotalCost());
         orderRepository.save(order1);
     }

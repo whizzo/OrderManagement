@@ -2,6 +2,7 @@ package com.example.OrderManagement.System.Service;
 
 
 import com.example.OrderManagement.System.Entity.Client;
+import com.example.OrderManagement.System.HttpExceptions.HttpRequestHandler;
 import com.example.OrderManagement.System.Repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,14 +24,14 @@ public class ClientService {
     public Optional<Client> getClient(Long id) throws Exception{
         Optional<Client> clientOptional = clientRepository.findById(id);
         if(clientRepository.findById(id).isEmpty()){
-            throw new Exception("Client with this id doesnt exist");
+            throw new HttpRequestHandler("Client with this id does not exist!");
         }
         return clientOptional;
     }
 
     public void addNewClient(Client client) throws Exception {
         if(clientRepository.findByEmail(client.getEmail()).isPresent()){
-            throw new Exception("Client with this email exists!");
+            throw new HttpRequestHandler("Client with this email exists!");
         }else{
             clientRepository.save(client);
         }
@@ -40,7 +41,7 @@ public class ClientService {
         if(clientRepository.findById(id).isPresent()){
             clientRepository.deleteById(id);
         }else{
-            throw new IllegalArgumentException("Client does not exist! ");
+            throw new HttpRequestHandler("Client does not exist! ");
         }
     }
 

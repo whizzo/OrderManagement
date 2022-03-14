@@ -2,17 +2,14 @@ package com.example.OrderManagement.System.Controller;
 
 
 import com.example.OrderManagement.System.Entity.Inventory;
-import com.example.OrderManagement.System.Entity.Item;
 import com.example.OrderManagement.System.Service.InventoryService;
 import com.example.OrderManagement.System.Transport.CreateInventoryTransport;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.ExecutionException;
+
 
 @RestController
 @RequestMapping(path = "api/inventory")

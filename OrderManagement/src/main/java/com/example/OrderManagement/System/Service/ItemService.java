@@ -1,8 +1,9 @@
 package com.example.OrderManagement.System.Service;
 
 
-import com.example.OrderManagement.System.Entity.Client;
+
 import com.example.OrderManagement.System.Entity.Item;
+import com.example.OrderManagement.System.HttpExceptions.HttpRequestHandler;
 import com.example.OrderManagement.System.Repository.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,14 +25,14 @@ public class ItemService {
     public Optional<Item> getItem(Long id) throws Exception{
         Optional<Item> itemOptional = itemRepository.findById(id);
         if(itemRepository.findById(id).isPresent()){
-            throw new Exception("Item with this id exists");
+            throw new HttpRequestHandler("Item with this id exists");
         }
         return itemOptional;
     }
 
     public void addNewItem(Item item) throws Exception {
         if(itemRepository.findByName(item.getName()).isPresent()){
-            throw new Exception("Item with this name exists!");
+            throw new HttpRequestHandler("Item with this name exists!");
         }else{
             itemRepository.save(item);
         }
@@ -42,7 +43,7 @@ public class ItemService {
             itemRepository.deleteById(id);
 
         }else{
-            throw new IllegalArgumentException("item does not exist!");
+            throw new HttpRequestHandler("item does not exist!");
         }
     }
 

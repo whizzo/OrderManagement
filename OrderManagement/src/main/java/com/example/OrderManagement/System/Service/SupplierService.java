@@ -3,6 +3,7 @@ package com.example.OrderManagement.System.Service;
 
 
 import com.example.OrderManagement.System.Entity.Supplier;
+import com.example.OrderManagement.System.HttpExceptions.HttpRequestHandler;
 import com.example.OrderManagement.System.Repository.SupplierRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,14 +25,14 @@ public class SupplierService {
     public Optional<Supplier> getSupplier(Long id) throws Exception{
         Optional<Supplier> supplierOptional = supplierRepository.findById(id);
         if(supplierRepository.findById(id).isPresent()){
-            throw new Exception("Supplier with this id does not exist!");
+            throw new HttpRequestHandler("Supplier with this id does not exist!");
         }
         return supplierOptional;
     }
 
     public void addNewSupplier(Supplier supplier) throws Exception {
         if(supplierRepository.findByName(supplier.getName()).isPresent()){
-            throw new Exception("Supplier with this name exists!");
+            throw new HttpRequestHandler("Supplier with this name exists!");
         }else{
             supplierRepository.save(supplier);
         }
@@ -41,7 +42,7 @@ public class SupplierService {
         if(supplierRepository.findById(id).isPresent()){
             supplierRepository.deleteById(id);
         }else{
-            throw new IllegalArgumentException("Supplier does not exist! ");
+            throw new HttpRequestHandler("Supplier does not exist! ");
         }
     }
 
