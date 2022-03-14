@@ -12,7 +12,5 @@ import java.util.Optional;
 public interface OrderRepository extends JpaRepository<Orderi, Long>{
 
     Optional<Orderi> findById(Long orderId);
-//    Optional<Order> findByDate(Date datenow);
-//    Optional<Order> findByTcost(Double totalCost);
 
 }

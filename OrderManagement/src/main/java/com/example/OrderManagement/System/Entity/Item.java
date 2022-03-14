@@ -1,6 +1,5 @@
 package com.example.OrderManagement.System.Entity;
 
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -22,8 +21,6 @@ public class Item {
 
     @ManyToMany(mappedBy = "items")
     private List<Orderi> inOrders;
-
-
 
 
     public Item() {

@@ -19,24 +19,30 @@ public class OrderController {
 
     private final OrderService orderService;
 
+
     @Autowired
     public OrderController(OrderService orderService){this.orderService = orderService;}
 
+
     @GetMapping
     public List<Orderi> getOrders(){return orderService.getOrders();}
+
 
     @GetMapping(path = "{orderID}")
     public Optional<Orderi> getOrder(@PathVariable ("orderID") Long id) throws Exception{
         return orderService.getOrder(id);
     }
 
+
     @PostMapping
     public void registerNewOrder(@RequestBody CreateOrderTransport createOrderTransport) throws Exception{
         orderService.addNewOrder(createOrderTransport);
     }
 
+
     @DeleteMapping(path = "{orderID}")
     public void deleteOrder(@PathVariable ("orderID") Long id) {orderService.deleteOrder(id);}
+
 
     @PutMapping(path = "{orderID}")
     public void updateOrder(

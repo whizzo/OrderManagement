@@ -1,8 +1,5 @@
 package com.example.OrderManagement.System.Entity;
 
-
-
-
 import javax.persistence.*;
 
 @Entity
@@ -34,17 +31,17 @@ public class Inventory {
 
     }
 
-    public Long getId(){return id;}
+    public Long getId(){ return id; }
 
-    public void setId(Long id){this.id = id;}
+    public void setId(Long id){ this.id = id; }
 
-    public Item getItem() {return item;}
+    public Item getItem() { return item; }
 
-    public void setItem(Item item) {this.item = item;}
+    public void setItem(Item item) { this.item = item; }
 
-    public int getQuantity(){return quantity;}
+    public int getQuantity(){ return quantity; }
 
-    public void setQuantity(int quantity){this.quantity = quantity;}
+    public void setQuantity(int quantity){ this.quantity = quantity; }
 
     @Override
     public String toString() {

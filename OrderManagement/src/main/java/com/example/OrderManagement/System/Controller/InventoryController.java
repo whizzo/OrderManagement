@@ -17,11 +17,14 @@ public class InventoryController {
 
     private final InventoryService inventoryService;
 
+
     @Autowired
     public InventoryController(InventoryService inventoryService) {this.inventoryService = inventoryService;}
 
+
     @GetMapping
     public List<Inventory> getInventories(){return inventoryService.getInventories();}
+
 
     @GetMapping(path = "{inventoryID}")
     public Optional<Inventory> getInventory(@PathVariable ("inventoryID") Long id) throws Exception{
@@ -43,6 +46,5 @@ public class InventoryController {
             @RequestBody Inventory inventory){
         inventoryService.updateInventory(id, inventory);
     }
-
 
 }

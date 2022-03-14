@@ -16,11 +16,14 @@ public class ItemController {
 
     private final ItemService itemService;
 
+
     @Autowired
     public ItemController(ItemService itemService) {this.itemService = itemService;}
 
+
     @GetMapping
     public List<Item> getItems() {return itemService.getItems();}
+
 
     @GetMapping(path = "{itemID}")
     public Optional<Item> getItem(@PathVariable ("itemID") Long id) throws Exception{
@@ -34,6 +37,7 @@ public class ItemController {
 
     @DeleteMapping(path = "{itemID}")
     public void deleteItem(@PathVariable ("itemID") Long id) {itemService.deleteItem(id);}
+
 
     @PutMapping(path = "{itemID}")
     public void updateItem(

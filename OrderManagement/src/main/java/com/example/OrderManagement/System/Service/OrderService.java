@@ -35,7 +35,8 @@ public class OrderService {
     }
 
 
-    public List <Orderi> getOrders(){return orderRepository.findAll();}
+    public List <Orderi> getOrders(){ return orderRepository.findAll(); }
+
 
     public Optional<Orderi> getOrder(Long id) throws Exception{
         Optional<Orderi> orderOptional = orderRepository.findById(id);
@@ -53,7 +54,7 @@ public class OrderService {
             Optional<Item> item = itemRepository.findById((Long.parseLong( id + "")));
 
             if(item.isEmpty()){
-                throw new HttpRequestHandler("this item does not exist");
+                throw new HttpRequestHandler("This item does not exist!");
             }else{
                 items.add(item.get());
                 Optional<Inventory> inventory = inventoryRepository.findInventoryByItemId(item.get().getId());
@@ -87,7 +88,6 @@ public class OrderService {
             throw new HttpRequestHandler("Order with this id does not exist");
         }
     }
-
 
 
     @Transactional

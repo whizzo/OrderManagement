@@ -17,11 +17,14 @@ public class SupplierController {
 
     private final SupplierService supplierService;
 
+
     @Autowired
     public SupplierController(SupplierService supplierService) {this.supplierService = supplierService;}
 
+
     @GetMapping
     public List<Supplier> getSuppliers(){return supplierService.getSuppliers();}
+
 
     @GetMapping(path = "{supplierID}")
     public Optional<Supplier> getSupplier(@PathVariable ("supplierID") Long id) throws Exception{
@@ -35,6 +38,7 @@ public class SupplierController {
 
     @DeleteMapping(path = "{supplierID}")
     public void deleteSupplier(@PathVariable("supplierID") Long id) {supplierService.deleteSupplier(id);}
+
 
     @PutMapping(path = "{supplierID}")
     public void updateSupplier(

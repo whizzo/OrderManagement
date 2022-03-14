@@ -29,7 +29,6 @@ public class Client {
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
-
     }
 
     public Client(String name, String email, Long phoneNumber){

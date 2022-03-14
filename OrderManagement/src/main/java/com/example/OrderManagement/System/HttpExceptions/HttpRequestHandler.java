@@ -11,5 +11,4 @@ public class HttpRequestHandler extends RuntimeException{
         super(message);
     }
 
-
 }

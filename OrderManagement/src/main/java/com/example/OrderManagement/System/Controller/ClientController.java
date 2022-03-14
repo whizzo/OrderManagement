@@ -16,11 +16,14 @@ public class ClientController {
 
     private final ClientService clientService;
 
+
     @Autowired
     public ClientController(ClientService clientService) { this.clientService= clientService; }
 
+
     @GetMapping
     public List<Client> getClients () {return clientService.getClients();}
+
 
     @GetMapping(path = "{clientID}")
     public Optional<Client> getClient(@PathVariable ("clientID") Long id) throws Exception{
